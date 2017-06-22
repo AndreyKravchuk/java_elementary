@@ -29,11 +29,9 @@ public class TwoInDegree {
             if (b == c) {
                 return true;
             }
-            else {
-                return false;
-            }
+
         }
-    
+    return false;
     }
 
 }
