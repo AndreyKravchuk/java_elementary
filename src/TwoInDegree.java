@@ -22,15 +22,15 @@ public class TwoInDegree {
         }
     }
 
-    public static boolean isNumberDegreeTwo(int a) {
+    public static boolean isNumberDegreeTwo(int b) {
 
-        for (int i = 0; i<50;i++){
-            int b = a>>i;
-        if (b == 2) {
-            return true;
-
-        } else if (b == 0) {
-            return false;
+        for (int i = 0; i<10; i++){
+            int c = 2 << i;
+            if (b == c) {
+                return true;
+            }
+            else {
+                return false;
             }
         }
     
