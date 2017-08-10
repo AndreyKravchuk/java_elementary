@@ -4,44 +4,58 @@ import java.util.ArrayList;
  */
 public class MainBinaryTree {
     private static ArrayList<TreeNode> binaryTree = new ArrayList<>();
-
+    private static TreeNode root = new TreeNode(7);
     public static void main(String[] args) {
 
-        TreeNode root = new TreeNode(7);
+
         binaryTree.add(root);
+        add(6);
         add(5);
-        add(10);
         add(3);
 
         System.out.println(binaryTree);
-        System.out.println(binaryTree.get(1).value);
-        System.out.println(binaryTree.get(1).up);
-        System.out.println(binaryTree.get(1).left);
-        System.out.println(binaryTree.get(1).right);
+        System.out.println(binaryTree.get(2).value);
+        System.out.println(binaryTree.get(2).up);
+        System.out.println(binaryTree.get(2).left);
+        System.out.println(binaryTree.get(2).right);
 
     }
 
-    /**The method find empty tree nod with rules and fills up it.
-     *
-     * @param number
-     */
-    private static void add(int number) {
-        TreeNode treeNode = new TreeNode(number);
-        binaryTree.add(treeNode);
+    private static void add(int number){
+        TreeNode newNode = new TreeNode(number);
+        binaryTree.add(newNode);
+        walk(newNode, root);
 
-        for (int i = 0; i < binaryTree.size();i++){
-            TreeNode element = binaryTree.get(i);
-            if (size(treeNode) < size(element) & element.left == null){
-                element.left = treeNode;
-                treeNode.up = element;
-                break;
+     }
+
+    /**
+     * The recursive method find empty treeNod with rules and fills up it.
+     * @param stepNode
+     * @param parent
+     */
+    private static void walk(TreeNode stepNode, TreeNode parent){
+        if (size(stepNode) < size(parent)){
+            if (parent.left == null){
+                parent.left = stepNode;
+                stepNode.up = parent;
             }
-            if (size(treeNode) >= size(element) & element.right == null){
-                element.right = treeNode;
-                treeNode.up = element;
-                break;
+            else {
+                parent = parent.left;
+                walk(stepNode, parent);
             }
         }
+        else {
+            if (parent.right == null){
+                parent.right = stepNode;
+                stepNode.up = parent;
+            }
+            else {
+                parent = parent.right;
+                walk(stepNode, parent);
+            }
+
+        }
+
     }
 
     /**The method checks the value of tree node.
@@ -53,6 +67,7 @@ public class MainBinaryTree {
         return treeNode.value != null;
     }
 
+
     /**
      *
      * @param treeNode
@@ -63,10 +78,4 @@ public class MainBinaryTree {
         size = treeNode.value;
         return size;
     }
-
-
-
-
-
-
 }
