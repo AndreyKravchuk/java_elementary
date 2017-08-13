@@ -1,32 +1,23 @@
+package HomeWork.HomeWork11;
+
 import java.util.ArrayList;
-/**
- * Created by user on 09.08.2017.
- */
-public class MainBinaryTree {
-    private static ArrayList<TreeNode> binaryTree = new ArrayList<>();
-    private static TreeNode root = new TreeNode(7);
-    public static void main(String[] args) {
+import java.util.Iterator;
 
 
+public class ContainerTree implements Iterable {
+
+    public static ArrayList<TreeNode> binaryTree = new ArrayList<>();
+    public static TreeNode root = new TreeNode(7);
+
+    public static void addRoot(){
         binaryTree.add(root);
-        add(6);
-        add(5);
-        add(3);
-
-        System.out.println(binaryTree);
-        System.out.println(binaryTree.get(2).value);
-        System.out.println(binaryTree.get(2).up);
-        System.out.println(binaryTree.get(2).left);
-        System.out.println(binaryTree.get(2).right);
-
     }
 
-    private static void add(int number){
+    public static void add(int number){
         TreeNode newNode = new TreeNode(number);
         binaryTree.add(newNode);
         walk(newNode, root);
-
-     }
+    }
 
     /**
      * The recursive method find empty treeNod with rules and fills up it.
@@ -63,8 +54,12 @@ public class MainBinaryTree {
      * @param treeNode
      * @return boolean value
      */
-    private static boolean contains(TreeNode treeNode) {
-        return treeNode.value != null;
+    public static boolean contains(TreeNode treeNode) throws RuntimeException{
+        try {
+            return treeNode.value != null;
+        } catch (Exception e){
+            return false;
+        }
     }
 
 
@@ -77,5 +72,40 @@ public class MainBinaryTree {
         int size;
         size = treeNode.value;
         return size;
+    }
+
+
+
+
+    @Override
+    public Iterator<TreeNode> iterator() {
+        return new ContainerIterator();
+    }
+
+    private class ContainerIterator implements Iterator<TreeNode> {
+
+        int current = -1;
+
+        @Override
+        public boolean hasNext() {
+            return binaryTree.size() > current + 1;
+        }
+
+        @Override
+        public TreeNode next(){
+            if (current < binaryTree.size() - 1) {
+                current++;
+                return binaryTree.get(current);
+            }
+
+            else {
+               throw new NextElementMissingException();
+            }
+        }
+
+        @Override
+        public void remove() {
+
+        }
     }
 }
