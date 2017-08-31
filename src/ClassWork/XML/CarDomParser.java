@@ -1,6 +1,7 @@
 package ClassWork.XML;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -20,13 +21,31 @@ public class CarDomParser {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(inputFile);
         doc.getDocumentElement().normalize();
-        NodeList nodes = doc.getElementsByTagName("cars");
-        Node node = nodes.item(0);
-        System.out.println(node.getNodeName());
-        System.out.println(node.getAttributes());
-        System.out.println(node.getChildNodes());
 
 
+        System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+
+        NodeList nList = doc.getElementsByTagName("car");
+
+
+
+        for (int i = 0; i < nList.getLength(); i++) {
+
+            Node nNode = nList.item(i);
+
+            System.out.println("\nCurrent Element :" + nNode.getNodeName());
+
+
+
+            Element eElement = (Element) nNode;
+
+            System.out.println("id : " + eElement.getAttribute("id"));
+            System.out.println("name : " + eElement.getElementsByTagName("name").item(0).getTextContent());
+            System.out.println("speed : " + eElement.getElementsByTagName("speed").item(0).getTextContent());
+            System.out.println("birthdate : " + eElement.getElementsByTagName("birthdate").item(0).getTextContent());
+
+
+        }
     }
 
 }
