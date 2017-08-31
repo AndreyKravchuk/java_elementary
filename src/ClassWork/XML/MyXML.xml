@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cars case="500">
+    <car id="55">
+        <name>Lada</name>
+        <speed>120</speed>
+        <birthdate>11-12-1980</birthdate>
+    </car>
+    <car id="56">
+        <name>Mersedes</name>
+        <speed>150</speed>
+        <birthdate>11-12-1982</birthdate>
+    </car>
+    <car id="57">
+        <name>Volvo</name>
+        <speed>200</speed>
+        <birthdate>11-12-1983</birthdate>
+    </car>
+</cars>
