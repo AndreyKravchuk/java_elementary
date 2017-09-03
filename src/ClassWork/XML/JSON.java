@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -16,10 +17,17 @@ public class JSON {
     public static void main(String[] args) throws IOException, ParseException {
 
         JSONParser jsonParser = new JSONParser();
-        JSONObject obj = (JSONObject) jsonParser.parse(new FileReader("/home/java6/IdeaProjects/java_elementary1/src/ClassWork/XML/Countries.json"));
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("C:/Users/kravchuk/IdeaProjects/java_elementary/src/ClassWork/XML/Countries.json"));
 
-        System.out.println(obj.get("USA"));
-        System.out.println(obj.containsKey("USA"));
+        JSONObject usa = (JSONObject) jsonObject.get("USA");
+        System.out.println(usa);
+        usa.putIfAbsent("South", "Texas");
+        System.out.println(usa);
+
+        try (FileWriter fileWriter = new FileWriter("C:/Users/kravchuk/IdeaProjects/java_elementary/src/ClassWork/XML/Countries.json")) {
+            jsonObject.writeJSONString(fileWriter);
+        }
+
     }
 
 }
